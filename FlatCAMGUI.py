@@ -1,7 +1,6 @@
 from PyQt4 import QtGui, QtCore, Qt
 from GUIElements import *
 
-
 class FlatCAMGUI(QtGui.QMainWindow):
 
     def __init__(self):
@@ -39,14 +38,17 @@ class FlatCAMGUI(QtGui.QMainWindow):
 
         # Open Project ...
         self.menufileopenproject = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Open &Project ...', self)
+        self.menufileopenproject.setShortcuts(QtGui.QKeySequence.Open)
         self.menufile.addAction(self.menufileopenproject)
 
         # Save Project
         self.menufilesaveproject = QtGui.QAction(QtGui.QIcon('share/floppy16.png'), '&Save Project', self)
+        self.menufilesaveproject.setShortcuts(QtGui.QKeySequence.Save)
         self.menufile.addAction(self.menufilesaveproject)
 
         # Save Project As ...
         self.menufilesaveprojectas = QtGui.QAction(QtGui.QIcon('share/floppy16.png'), 'Save Project &As ...', self)
+        self.menufilesaveprojectas.setShortcuts(QtGui.QKeySequence.SaveAs)
         self.menufile.addAction(self.menufilesaveprojectas)
 
         # Save Project Copy ...

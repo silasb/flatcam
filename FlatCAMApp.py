@@ -1082,11 +1082,15 @@ class App(QtCore.QObject):
         :return: None
         """
 
-        try:
+        files_types = "FlatCam (*.fcam);;"
+
+        if self.last_folder:
             filename = QtGui.QFileDialog.getSaveFileName(caption="Save Project As ...",
+                                                         filter=files_types,
                                                          directory=self.last_folder)
-        except TypeError:
-            filename = QtGui.QFileDialog.getSaveFileName(caption="Save Project As ...")
+        else:
+            filename = QtGui.QFileDialog.getSaveFileName(caption="Save Project As ...",
+                                                         filter=files_types)
 
         try:
             f = open(filename, 'r')
