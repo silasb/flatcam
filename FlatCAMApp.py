@@ -1045,11 +1045,18 @@ class App(QtCore.QObject):
     def on_file_openproject(self):
         App.log.debug("on_file_openproject()")
 
+        files_types = "FlatCam (*.fcam);;All Files (*.*)"
+        default_filter = "FlatCam (*.fcam)"
+
         try:
             filename = QtGui.QFileDialog.getOpenFileName(caption="Open Project",
+                                                         filter=files_types,
+                                                         selectedFilter=default_filter,
                                                          directory=self.last_folder)
         except TypeError:
-            filename = QtGui.QFileDialog.getOpenFileName(caption="Open Project")
+            filename = QtGui.QFileDialog.getOpenFileName(caption="Open Project",
+                                                         filter=files_types,
+                                                         selectedFilter=default_filter)
 
         if str(filename) == "":
             self.inform.emit("Open cancelled.")
