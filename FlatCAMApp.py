@@ -1100,7 +1100,7 @@ class App(QtCore.QObject):
         else:
             split_files = filename.split('.')
             if len(split_files) == 1:
-                filename += '.gcam'
+                filename += '.fcam'
 
         try:
             f = open(filename, 'r')
