@@ -1082,15 +1082,25 @@ class App(QtCore.QObject):
         :return: None
         """
 
-        files_types = "FlatCam (*.fcam);;"
+        files_types = "FlatCam (*.fcam);;All Files (*.*)"
+        default_filter = "FlatCam (*.fcam)"
 
         if self.last_folder:
             filename = QtGui.QFileDialog.getSaveFileName(caption="Save Project As ...",
                                                          filter=files_types,
+                                                         selectedFilter=default_filter,
                                                          directory=self.last_folder)
         else:
             filename = QtGui.QFileDialog.getSaveFileName(caption="Save Project As ...",
+                                                         selectedFilter=default_filter,
                                                          filter=files_types)
+
+        if not filename:
+            return
+        else:
+            split_files = filename.split('.')
+            if len(split_files) == 1:
+                filename += '.gcam'
 
         try:
             f = open(filename, 'r')
