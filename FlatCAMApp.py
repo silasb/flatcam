@@ -1113,23 +1113,6 @@ class App(QtCore.QObject):
             if len(split_files) == 1:
                 filename += '.fcam'
 
-        try:
-            f = open(filename, 'r')
-            f.close()
-            exists = True
-        except IOError:
-            exists = False
-
-        msg = "File exists. Overwrite?"
-        if exists:
-            msgbox = QtGui.QMessageBox()
-            msgbox.setInformativeText(msg)
-            msgbox.setStandardButtons(QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
-            msgbox.setDefaultButton(QtGui.QMessageBox.Cancel)
-            result = msgbox.exec_()
-            if result == QtGui.QMessageBox.Cancel:
-                return
-
         self.save_project(filename)
         self.file_opened.emit("project", filename)
 
