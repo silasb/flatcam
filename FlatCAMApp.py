@@ -313,7 +313,7 @@ class App(QtCore.QObject):
         ####################
         self.setup_obj_classes()
         self.setup_recent_items()
-        self.setup_component_editor()
+        #self.setup_component_editor()
 
         #########################
         ### Tools and Plugins ###
@@ -828,7 +828,7 @@ class App(QtCore.QObject):
         self.plotcanvas.auto_adjust_axes()
 
         # Clear form
-        self.setup_component_editor()
+        #self.setup_component_editor()
 
         # Remove from dictionary
         self.collection.delete_active()
@@ -981,7 +981,7 @@ class App(QtCore.QObject):
 
         self.collection.delete_all()
 
-        self.setup_component_editor()
+        #self.setup_component_editor()
 
         # Clear project filename
         self.project_filename = None
