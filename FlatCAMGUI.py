@@ -48,7 +48,7 @@ class FlatCAMGUI(QtGui.QMainWindow):
 
         # Save Project As ...
         self.menufilesaveprojectas = QtGui.QAction(QtGui.QIcon('share/floppy16.png'), 'Save Project &As ...', self)
-        self.menufilesaveprojectas.setShortcuts(QtGui.QKeySequence.SaveAs)
+        self.menufilesaveprojectas.setShortcuts(QtGui.QKeySequence("Ctrl+Shift+S"))
         self.menufile.addAction(self.menufilesaveprojectas)
 
         # Save Project Copy ...
