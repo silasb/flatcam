@@ -60,12 +60,9 @@ class FlatCAMGUI(QtGui.QMainWindow):
         self.menufile.addAction(self.menufilesavedefaults)
 
         # Quit
-        exit_action = QtGui.QAction(QtGui.QIcon('share/power16.png'), '&Exit', self)
-        # exitAction.setShortcut('Ctrl+Q')
-        # exitAction.setStatusTip('Exit application')
-        exit_action.triggered.connect(QtGui.qApp.quit)
-
-        self.menufile.addAction(exit_action)
+        self.menufilequit = QtGui.QAction(QtGui.QIcon('share/power16.png'), '&Exit', self)
+        self.menufilequit.setShortcut('Ctrl+Q')
+        self.menufile.addAction(self.menufilequit)
 
         ### Edit ###
         self.menuedit = self.menu.addMenu('&Edit')

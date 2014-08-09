@@ -283,6 +283,7 @@ class App(QtCore.QObject):
         self.ui.menufilesaveprojectas.triggered.connect(self.on_file_saveprojectas)
         self.ui.menufilesaveprojectcopy.triggered.connect(lambda: self.on_file_saveprojectas(make_copy=True))
         self.ui.menufilesavedefaults.triggered.connect(self.on_file_savedefaults)
+        self.ui.menufilequit.triggered.connect(self.on_file_quit)
         self.ui.menueditdelete.triggered.connect(self.on_delete)
         self.ui.menuoptions_transfer_a2o.triggered.connect(self.on_options_app2object)
         self.ui.menuoptions_transfer_a2p.triggered.connect(self.on_options_app2project)
@@ -600,6 +601,9 @@ class App(QtCore.QObject):
             return
 
         self.inform.emit("Defaults saved.")
+
+    def on_file_quit(self):
+        QtGui.qApp.quit()
 
     def on_options_app2project(self):
         """
