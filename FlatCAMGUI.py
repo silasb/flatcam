@@ -25,15 +25,15 @@ class FlatCAMGUI(QtGui.QMainWindow):
         self.recent = self.menufile.addMenu(QtGui.QIcon('share/folder16.png'), "Open recent ...")
 
         # Open gerber
-        self.menufileopengerber = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Open &Gerber ...', self)
+        self.menufileopengerber = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Import &Gerber ...', self)
         self.menufile.addAction(self.menufileopengerber)
 
         # Open Excellon ...
-        self.menufileopenexcellon = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Open &Excellon ...', self)
+        self.menufileopenexcellon = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Import &Excellon ...', self)
         self.menufile.addAction(self.menufileopenexcellon)
 
         # Open G-Code ...
-        self.menufileopengcode = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Open G-&Code ...', self)
+        self.menufileopengcode = QtGui.QAction(QtGui.QIcon('share/folder16.png'), 'Import G-&Code ...', self)
         self.menufile.addAction(self.menufileopengcode)
 
         # Open Project ...
