@@ -270,8 +270,10 @@ class App(QtCore.QObject):
         self.progress.connect(self.set_progress_bar)
         self.object_created.connect(self.on_object_created)
         self.plots_updated.connect(self.on_plots_updated)
-        self.file_opened.connect(self.register_recent)
-        self.file_opened.connect(lambda kind, filename: self.register_folder(filename))
+        self.file_opened.connect(lambda kind, filename:
+                self.register_recent(kind, str(filename)))
+        self.file_opened.connect(lambda kind, filename:
+                self.register_folder(str(filename)))
         ## Standard signals
         # Menu
         self.ui.menufilenew.triggered.connect(self.on_file_new)
@@ -411,7 +413,7 @@ class App(QtCore.QObject):
         self.log.debug("   %s" % kind)
         self.log.debug("   %s" % filename)
 
-        record = {'kind': str(kind), 'filename': str(filename)}
+        record = {'kind': str(kind), 'filename': filename}
         if record in self.recent:
             return
 
@@ -1011,7 +1013,8 @@ class App(QtCore.QObject):
         except TypeError:
             filename = QtGui.QFileDialog.getOpenFileName(caption="Open Gerber")
 
-        if str(filename) == "":
+        filename = str(filename)
+        if filename == "":
             self.inform.emit("Open cancelled.")
         else:
             self.worker_task.emit({'fcn': self.open_gerber,
@@ -1025,7 +1028,8 @@ class App(QtCore.QObject):
         except TypeError:
             filename = QtGui.QFileDialog.getOpenFileName(caption="Open Excellon")
 
-        if str(filename) == "":
+        filename = str(filename)
+        if filename == "":
             self.inform.emit("Open cancelled.")
         else:
             self.worker_task.emit({'fcn': self.open_excellon,
@@ -1040,7 +1044,8 @@ class App(QtCore.QObject):
         except TypeError:
             filename = QtGui.QFileDialog.getOpenFileName(caption="Open G-Code")
 
-        if str(filename) == "":
+        filename = str(filename)
+        if filename == "":
             self.inform.emit("Open cancelled.")
         else:
             self.worker_task.emit({'fcn': self.open_gcode,
@@ -1062,7 +1067,8 @@ class App(QtCore.QObject):
                                                          filter=files_types,
                                                          selectedFilter=default_filter)
 
-        if str(filename) == "":
+        filename = str(filename)
+        if filename == "":
             self.inform.emit("Open cancelled.")
         else:
             self.worker_task.emit({'fcn': self.open_project,
@@ -1361,7 +1367,7 @@ class App(QtCore.QObject):
         self.worker_task.emit({'fcn': worker_task, 'params': [self]})
 
     def register_folder(self, filename):
-        self.last_folder = os.path.split(str(filename))[0]
+        self.last_folder = os.path.split(filename)[0]
 
     def set_progress_bar(self, percentage, text=""):
         self.ui.progress_bar.setValue(int(percentage))
@@ -1378,9 +1384,18 @@ class App(QtCore.QObject):
         }
 
         openers = {
-            'gerber': lambda fname: self.worker_task.emit({'fcn': self.open_gerber, 'params': [fname]}),
-            'excellon': lambda fname: self.worker_task.emit({'fcn': self.open_excellon, 'params': [fname]}),
-            'cncjob': lambda fname: self.worker_task.emit({'fcn': self.open_gcode, 'params': [fname]}),
+            'gerber': lambda fname:
+                self.worker_task.emit(
+                    {'fcn': self.open_gerber, 'params': [str(fname)]}
+                ),
+            'excellon': lambda fname:
+                self.worker_task.emit(
+                    {'fcn': self.open_excellon, 'params': [str(fname)]}
+                ),
+            'cncjob': lambda fname:
+                self.worker_task.emit(
+                    {'fcn': self.open_gcode, 'params': [str(fname)]}
+                ),
             'project': self.open_project
         }
 
@@ -1533,14 +1548,14 @@ class App(QtCore.QObject):
         try:
             f = open(filename, 'w')
         except IOError:
-            App.log.error("ERROR: Failed to open file for saving: %s", str(filename))
+            App.log.error("ERROR: Failed to open file for saving: %s", filename)
             return
 
         # Write
         try:
             json.dump(d, f, default=to_dict)
         except:
-            App.log.error("ERROR: File open but failed to write: %s", str(filename))
+            App.log.error("ERROR: File open but failed to write: %s", filename)
             f.close()
             return
 
