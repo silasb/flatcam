@@ -19,11 +19,12 @@ class Worker(QtCore.QObject):
         self.app.worker_task.connect(self.do_worker_task)
 
     def do_worker_task(self, task):
-        FlatCAMApp.App.log.debug("Running task: %s" % str(task))
         if 'worker_name' in task and task['worker_name'] == self.name:
+            FlatCAMApp.App.log.debug("Running task: %s" % str(task))
             task['fcn'](*task['params'])
             return
 
         if 'worker_name' not in task and self.name is None:
+            FlatCAMApp.App.log.debug("Running task: %s" % str(task))
             task['fcn'](*task['params'])
             return
