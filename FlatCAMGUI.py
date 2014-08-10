@@ -18,6 +18,7 @@ class FlatCAMGUI(QtGui.QMainWindow):
 
         # New
         self.menufilenew = QtGui.QAction(QtGui.QIcon('share/file16.png'), '&New', self)
+        self.menufilenew.setShortcut('Ctrl+N')
         self.menufile.addAction(self.menufilenew)
         # Open recent
 
