@@ -1533,14 +1533,14 @@ class App(QtCore.QObject):
         try:
             f = open(filename, 'w')
         except IOError:
-            App.log.error("ERROR: Failed to open file for saving:", filename)
+            App.log.error("ERROR: Failed to open file for saving: %s", str(filename))
             return
 
         # Write
         try:
             json.dump(d, f, default=to_dict)
         except:
-            App.log.error("ERROR: File open but failed to write:", filename)
+            App.log.error("ERROR: File open but failed to write: %s", str(filename))
             f.close()
             return
 

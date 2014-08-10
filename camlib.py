@@ -2350,7 +2350,7 @@ def to_dict(obj):
             "__class__": "Shply",
             "__inst__": sdumps(obj)
         }
-    return obj
+    raise TypeError("Unserialize object {} of type {}".format(obj, type(obj)))
 
 
 def dict2obj(d):
