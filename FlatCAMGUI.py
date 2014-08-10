@@ -216,8 +216,16 @@ class FlatCAMGUI(QtGui.QMainWindow):
         self.setWindowIcon(self.app_icon)
 
         self.setGeometry(100, 100, 1024, 650)
-        self.setWindowTitle('FlatCAM - Alpha 5')
+        self.set_window_title()
         self.show()
+
+    def set_window_title(self, title = None):
+        app_title = 'FlatCam - Alpha 5'
+
+        if title:
+            app_title += ': {0}'.format(title)
+
+        self.setWindowTitle(app_title)
 
 
 class OptionsGroupUI(QtGui.QGroupBox):

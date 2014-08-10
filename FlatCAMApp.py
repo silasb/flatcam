@@ -86,6 +86,7 @@ class App(QtCore.QObject):
         self.clipboard = QtGui.QApplication.clipboard()
 
         self.project_filename = None
+        self.ui.set_window_title(self.project_filename)
 
         self.last_folder = None
 
@@ -991,6 +992,7 @@ class App(QtCore.QObject):
 
         # Clear project filename
         self.project_filename = None
+        self.ui.set_window_title(self.project_filename)
 
         # Re-fresh project options
         self.on_options_app2project()
@@ -1124,6 +1126,8 @@ class App(QtCore.QObject):
 
         if not make_copy:
             self.project_filename = filename
+            self.ui.set_window_title(self.project_filename)
+
             self.inform.emit("Project saved to: " + self.project_filename)
         else:
             self.inform.emit("Project copy saved to: " + self.project_filename)
@@ -1321,7 +1325,10 @@ class App(QtCore.QObject):
 
         # Project options
         self.options.update(d['options'])
+
         self.project_filename = filename
+        self.ui.set_window_title(self.project_filename)
+
         self.ui.units_label.setText("[" + self.options["units"] + "]")
 
         # Re create objects
